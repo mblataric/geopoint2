@@ -1,4 +1,4 @@
-import 'package:geopoint/geopoint.dart';
+import 'package:geopoint2/geopoint.dart';
 import 'package:latlong2/latlong.dart';
 
 class Place {

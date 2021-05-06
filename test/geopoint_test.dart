@@ -1,5 +1,5 @@
 import "package:test/test.dart";
-import 'package:geopoint/geopoint.dart';
+import 'package:geopoint2/geopoint.dart';
 import 'package:latlong2/latlong.dart';
 
 void main() {
@@ -105,7 +105,7 @@ void main() {
   });
 
   test("strings_map", () {
-    final m = <String, String>{
+    final m = <String, String?>{
       "name": geoPoint.name,
       "timestamp": "${geoPoint.timestamp}",
       "latitude": "${geoPoint.latitude}",
@@ -128,12 +128,12 @@ void main() {
     expect(geoPoint.toStringsMap(), equals(m));
   });
 
-  test("null", () {
-    expect(() => GeoPoint(latitude: null, longitude: 0.0),
-        throwsA(predicate<dynamic>((dynamic e) => e is AssertionError)));
-    expect(() => GeoPoint(latitude: 0.0, longitude: null),
-        throwsA(predicate<dynamic>((dynamic e) => e is AssertionError)));
-  });
+  // test("null", () {
+  //   expect(() => GeoPoint(latitude: null, longitude: 0.0),
+  //       throwsA(predicate<dynamic>((dynamic e) => e is AssertionError)));
+  //   expect(() => GeoPoint(latitude: 0.0, longitude: null),
+  //       throwsA(predicate<dynamic>((dynamic e) => e is AssertionError)));
+  // });
 
   test("latlng", () {
     final gp = GeoPoint.fromLatLng(name: "gp", point: LatLng(0.0, 0.0));
