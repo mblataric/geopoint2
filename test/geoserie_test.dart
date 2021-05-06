@@ -1,5 +1,5 @@
 import "package:test/test.dart";
-import 'package:geopoint2/geopoint.dart';
+import 'package:geopoint2/geopoint2.dart';
 import 'package:latlong2/latlong.dart';
 
 void main() {

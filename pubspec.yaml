@@ -1,6 +1,6 @@
 name: geopoint2
 description: Geospatial data structures. Provides GeoPoint and GeoSerie models.
-homepage: https://github.com/synw/geopoint
+homepage: https://github.com/DrNorton/geopoint
 version: 0.9.0
 
 environment:

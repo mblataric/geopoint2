@@ -1,4 +1,4 @@
-import 'package:geopoint2/geopoint.dart';
+import 'package:geopoint2/geopoint2.dart';
 import 'package:latlong2/latlong.dart';
 
 class Place {
@@ -28,7 +28,8 @@ Future<void> main() async {
   final geoSerie = GeoSerie(
       name: "Paris places", type: GeoSerieType.group, geoPoints: geoPoints);
   print("${geoSerie.toMap()}");
-  for (final gp in geoSerie.geoPoints) {
+
+  for (final gp in geoSerie.geoPoints!) {
     print("${gp.name}: ${gp.latitude}/${gp.longitude}");
   }
 }
