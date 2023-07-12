@@ -1,6 +1,6 @@
-import "package:test/test.dart";
-import 'package:geopoint2/geopoint2.dart';
+import 'package:geopoint3/geopoint3.dart';
 import 'package:latlong2/latlong.dart';
+import "package:test/test.dart";
 
 void main() {
   final geoPoints = <GeoPoint>[
@@ -75,7 +75,7 @@ void main() {
   });
 
   test("latlng", () {
-    expect(<LatLng>[LatLng(0.0, 0.0), LatLng(1.0, 1.0)], geoSerie.toLatLng());
+    expect(<LatLng>[const LatLng(0.0, 0.0), const LatLng(1.0, 1.0)], geoSerie.toLatLng());
   });
 
   test("geojson", () {

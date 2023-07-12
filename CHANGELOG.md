@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.1
+
+- Update package dependencies 
+- Cleaned up code warnings
+
 ## 0.9.0
 
 - Fork and migrate to sound null safety

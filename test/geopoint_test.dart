@@ -1,6 +1,6 @@
-import "package:test/test.dart";
-import 'package:geopoint2/geopoint2.dart';
+import 'package:geopoint3/geopoint3.dart';
 import 'package:latlong2/latlong.dart';
+import "package:test/test.dart";
 
 void main() {
   final ts = DateTime.now().millisecondsSinceEpoch;
@@ -34,7 +34,7 @@ void main() {
     expect(geoPoint.heading, equals(0.0));
     expect(geoPoint.name, equals("gp"));
     expect(geoPoint.slug, equals("gp"));
-    expect(geoPoint.point, equals(LatLng(0.0, 0.0)));
+    expect(geoPoint.point, equals(const LatLng(0.0, 0.0)));
     var str = "Geopoint: ${geoPoint.name}\n";
     str += "Lat: ${geoPoint.latitude}\n";
     str += "Lon: ${geoPoint.longitude}\n";
@@ -136,11 +136,11 @@ void main() {
   // });
 
   test("latlng", () {
-    final gp = GeoPoint.fromLatLng(name: "gp", point: LatLng(0.0, 0.0));
+    final gp = GeoPoint.fromLatLng(name: "gp", point: const LatLng(0.0, 0.0));
     expect(gp.latitude, equals(0.0));
     expect(gp.longitude, equals(0.0));
     final tl = gp.toLatLng();
-    expect(LatLng(0.0, 0.0), tl);
+    expect(const LatLng(0.0, 0.0), tl);
   });
 
   test("tostring", () {

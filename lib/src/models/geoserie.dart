@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:latlong2/latlong.dart';
-import 'package:meta/meta.dart';
 import 'geopoint.dart';
 
 /// The type of the geoserie: group of points, line or polygon
@@ -53,7 +52,7 @@ class GeoSerie {
   String? get typeStr => _typeToString();
 
   /// Make a [GeoSerie] from json data
-  GeoSerie.fromJson(Map<String, dynamic> json)
+  GeoSerie.fromJson(final Map<String, dynamic> json)
       : name = "${json["name"]}",
         id = int.parse("${json["id"]}"),
         surface = double.tryParse("${json["surface"]}") {
@@ -62,8 +61,7 @@ class GeoSerie {
 
   /// Make a [GeoSerie] from name and serie type
   GeoSerie.fromNameAndType(
-      {required this.name, required String typeStr, this.id})
-      : assert(typeStr != null) {
+      {required this.name, required final String typeStr, this.id}) {
     type = _typeFromString(typeStr);
   }
 
@@ -72,7 +70,7 @@ class GeoSerie {
   /// [id] the id of the serie
 
   /// Get a json map from this [GeoSerie]
-  Map<String, dynamic> toMap({bool withId = true}) {
+  Map<String, dynamic> toMap({final bool withId = true}) {
     /// [withId] include the id in the result
     final json = <String, dynamic>{
       "name": name,
@@ -86,12 +84,12 @@ class GeoSerie {
   }
 
   /// Get a list of [LatLng] from this [GeoSerie]
-  List<LatLng> toLatLng({bool ignoreErrors = false}) {
+  List<LatLng> toLatLng({final bool ignoreErrors = false}) {
     final points = <LatLng>[];
     for (final geoPoint in geoPoints!) {
       try {
         points.add(geoPoint.point);
-      } catch (_) {
+      } on Exception catch (_) {
         if (!ignoreErrors) {
           rethrow;
         }
@@ -110,10 +108,10 @@ class GeoSerie {
   }
 
   /// Convert to a geojson feature string
-  String toGeoJsonFeatureString(Map? properties) =>
+  String toGeoJsonFeatureString(final Map<String, dynamic>? properties) =>
       _toGeoJsonFeatureString(properties);
 
-  String _toGeoJsonFeatureString(Map? properties) {
+  String _toGeoJsonFeatureString(final Map<String, dynamic>? properties) {
     String? featType;
     switch (type) {
       case GeoSerieType.group:
@@ -124,12 +122,16 @@ class GeoSerie {
         break;
       case GeoSerieType.polygon:
         featType = "Polygon";
+        break;
+      case null:
+        featType = "";
+        break;
     }
     return _buildGeoJsonFeature(
         featType, properties ?? <String, dynamic>{"name": name});
   }
 
-  String _buildGeoJsonFeature(String? type, Map properties) {
+  String _buildGeoJsonFeature(final String? type, final Map<String, dynamic> properties) {
     var extra1 = "";
     var extra2 = "";
     if (type == "Polygon") {
@@ -145,7 +147,7 @@ class GeoSerie {
         '}}';
   }
 
-  GeoSerieType? _typeFromString(String typeStr) {
+  GeoSerieType? _typeFromString(final String typeStr) {
     GeoSerieType? res;
     switch (typeStr) {
       case "group":
@@ -160,7 +162,7 @@ class GeoSerie {
     return res;
   }
 
-  String? _typeToString([GeoSerieType? st]) {
+  String? _typeToString([final GeoSerieType? st]) {
     GeoSerieType? t;
     (st != null) ? t = st : t = type;
     String? res;
@@ -173,6 +175,10 @@ class GeoSerie {
         break;
       case GeoSerieType.polygon:
         res = "polygon";
+        break;
+      case null:
+        res = "";
+        break;
     }
     return res;
   }
